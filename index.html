@@ -21,7 +21,7 @@
         <script src="https://js.arcgis.com/4.26/"></script> 
     
         <script>
-            require([ "esri/config","esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search" ], (esriConfig, Map, MapView, Locate, Search) => {
+            require([ "esri/config","esri/Map", "esri/views/MapView", "esri/widgets/Locate", "esri/widgets/Search", "esri/layers/FeatureLayer" ], (esriConfig, Map, MapView, Locate, Search, FeatureLayer) => {
                 esriConfig.apiKey = "AAPK48b9a2ca3e404b41bc418de0c5098a9bdsC1--6umjqp5lHybY0XcVoG0I3sumZaOrAREl3KzcrdNvjRPlsbDzPrwE_UtkBH";
 
                 const map = new Map({
@@ -45,10 +45,18 @@
              const searchWidget = new Search({
             view: view
             });
+
+            // Create featurelayer from feature service 
+            const layer = new FeatureLayer({ 
+            // URL to the service 
+            url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/survey123_df7972f70f1b4fdd98447f9dc510cb5e_results/FeatureServer"
+            });
+
+            map.add(layer);
 // Adds the search widget below other elements in
 // the top left corner of the view
             view.ui.add(searchWidget, {
-            position: "top-left",
+            position: "top-right",
             index: 2
             });
         });
